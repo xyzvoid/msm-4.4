@@ -145,8 +145,10 @@ struct scan_control {
 
 /*
  * From 0 .. 100.  Higher means more swappy.
+ * Raise to 100 for 3GB+zRAM: prefer swapping cold anon memory to
+ * zRAM over dropping page cache. This keeps more app data alive.
  */
-int vm_swappiness = 60;
+int vm_swappiness = 100;
 /*
  * The total number of pages which are beyond the high watermark within all
  * zones.

@@ -867,7 +867,7 @@ unsigned int max_task_load(void)
  *	rq->nr_running > sysctl_sched_spill_nr_run ||
  *	rq->hmp_stats.cumulative_runnable_avg > sched_spill_load
  */
-unsigned int __read_mostly sysctl_sched_spill_nr_run = 10;
+unsigned int __read_mostly sysctl_sched_spill_nr_run = 5;
 
 /*
  * Place sync wakee tasks those have less than configured demand to the waker's
@@ -886,7 +886,7 @@ unsigned int __read_mostly sysctl_sched_big_waker_task_load_pct = 25;
  * cluster migration.
  */
 unsigned int __read_mostly sched_spill_load;
-unsigned int __read_mostly sysctl_sched_spill_load_pct = 100;
+unsigned int __read_mostly sysctl_sched_spill_load_pct = 90;
 
 /*
  * Prefer the waker CPU for sync wakee task, if the CPU has only 1 runnable
@@ -902,7 +902,7 @@ unsigned int __read_mostly sysctl_sched_prefer_sync_wakee_to_waker;
  * capacity.
  */
 unsigned int __read_mostly sched_upmigrate;
-unsigned int __read_mostly sysctl_sched_upmigrate_pct = 80;
+unsigned int __read_mostly sysctl_sched_upmigrate_pct = 65;
 
 /*
  * Big tasks, once migrated, will need to drop their bandwidth
@@ -910,14 +910,14 @@ unsigned int __read_mostly sysctl_sched_upmigrate_pct = 80;
  * migrated.
  */
 unsigned int __read_mostly sched_downmigrate;
-unsigned int __read_mostly sysctl_sched_downmigrate_pct = 60;
+unsigned int __read_mostly sysctl_sched_downmigrate_pct = 45;
 
 /*
  * Task groups whose aggregate demand on a cpu is more than
  * sched_group_upmigrate need to be up-migrated if possible.
  */
 unsigned int __read_mostly sched_group_upmigrate;
-unsigned int __read_mostly sysctl_sched_group_upmigrate_pct = 100;
+unsigned int __read_mostly sysctl_sched_group_upmigrate_pct = 75;
 
 /*
  * Task groups, once up-migrated, will need to drop their aggregate
@@ -925,7 +925,7 @@ unsigned int __read_mostly sysctl_sched_group_upmigrate_pct = 100;
  * migrated.
  */
 unsigned int __read_mostly sched_group_downmigrate;
-unsigned int __read_mostly sysctl_sched_group_downmigrate_pct = 95;
+unsigned int __read_mostly sysctl_sched_group_downmigrate_pct = 55;
 
 /*
  * The load scale factor of a CPU gets boosted when its max frequency
