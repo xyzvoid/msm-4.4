@@ -578,6 +578,7 @@ static struct ctl_table kern_table[] = {
 		.maxlen		= sizeof(unsigned int),
 		.mode		= 0644,
 		.proc_handler	= proc_dointvec,
+		.extra1		= &one,
 	},
 	{
 		.procname	= "sched_nr_migrate",
