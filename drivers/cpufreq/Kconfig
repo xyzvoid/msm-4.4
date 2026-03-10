@@ -112,6 +112,20 @@ config CPU_FREQ_DEFAULT_GOV_CONSERVATIVE
 	  governor. If unsure have a look at the help section of the
 	  driver. Fallback governor will be the performance governor.
 
+
+config CPU_FREQ_GOV_SCHEDUTIL
+	tristate "'schedutil' cpufreq policy governor"
+	depends on CPU_FREQ && SMP
+	select IRQ_WORK
+	help
+	  This governor makes decisions based on the utilization data
+	  provided by the Linux scheduler via its PELT mechanism.
+	  Sets CPU frequency proportional to current utilisation.
+	  Pairs with EAS for optimal power/perf on big.LITTLE SoCs.
+
+	  To compile as a module choose M: module is cpufreq_schedutil.
+
+	  If in doubt, say N.
 config CPU_FREQ_DEFAULT_GOV_INTERACTIVE
 	bool "interactive"
 	select CPU_FREQ_GOV_INTERACTIVE

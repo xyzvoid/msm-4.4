@@ -1361,6 +1361,24 @@ config DEFAULT_USE_ENERGY_AWARE
 	default n
 	help
 	  This option defaults the ENERGY_AWARE scheduling feature to true,
+
+config SCHED_EAS
+	bool "Energy Aware Scheduling (EAS)"
+	depends on SMP
+	select SCHED_MC
+	default n
+	help
+	  Enable Energy Aware Scheduling. EAS uses an energy model to
+	  minimise energy on asymmetric (big.LITTLE / DynamIQ) SoCs.
+	  Requires the schedutil cpufreq governor.
+
+config SCHED_EAS_ENERGY_MARGIN_PCT
+	int "EAS energy margin (%)"
+	depends on SCHED_EAS
+	range 0 50
+	default 5
+	help
+	  Margin when comparing energy costs between CPUs (percent).
 	  as without SCHED_DEBUG set this feature can't be enabled or disabled
 	  via sysctl.
 
