@@ -65,6 +65,13 @@ source "net/unix/Kconfig"
 source "net/xfrm/Kconfig"
 source "net/iucv/Kconfig"
 
+
+config BPF_STREAM_PARSER
+	bool "BPF stream parser"
+	depends on BPF_SYSCALL && INET
+	default n
+	help
+	  Enable BPF stream parser for TCP/UDP socket maps.
 config INET
 	bool "TCP/IP networking"
 	select CRYPTO

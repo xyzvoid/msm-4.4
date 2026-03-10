@@ -1,0 +1,55 @@
+# SPDX-License-Identifier: GPL-2.0
+# eBPF configuration - msm-4.4 backport
+
+config BPF
+	bool
+	default n
+	help
+	  BPF (Berkeley Packet Filter) is an in-kernel virtual machine.
+
+config BPF_SYSCALL
+	bool "Enable bpf() system call"
+	select BPF
+	select ANON_INODES
+	default n
+	help
+	  Enable the bpf() syscall that allows creating and using eBPF
+	  maps and programs from userspace. Required for tools like
+	  bpftool, bcc, libbpf.
+
+config BPF_JIT
+	bool "Enable BPF Just In Time compiler"
+	depends on BPF
+	default n
+	help
+	  BPF programs are normally interpreted. This option allows the
+	  kernel to generate native machine code when a BPF program is
+	  loaded into the kernel (JIT compilation). Much faster than
+	  the interpreter for long-running programs.
+
+config BPF_JIT_ALWAYS_ON
+	bool "Permanently enable BPF JIT and remove BPF interpreter"
+	depends on BPF_JIT
+	default n
+	help
+	  Removes the BPF interpreter to avoid Spectre v2 attacks.
+
+config HAVE_BPF_JIT
+	bool
+	depends on BPF_JIT
+
+config BPF_EVENTS
+	bool "Enable BPF programs attached to uprobes/kprobes/tracepoints"
+	depends on BPF_SYSCALL && (KPROBES || UPROBE_EVENTS) && PERF_EVENTS
+	default n
+	help
+	  Allow BPF programs to be attached to kprobes, uprobes and
+	  tracepoints for dynamic tracing.
+
+config CGROUP_BPF
+	bool "BPF programs attached to cgroup"
+	depends on BPF_SYSCALL && CGROUPS
+	default n
+	help
+	  Attach BPF programs to cgroup for network, device, and sysctl
+	  hooks.
