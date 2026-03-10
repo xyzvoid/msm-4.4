@@ -34,10 +34,6 @@ config BPF_JIT_ALWAYS_ON
 	help
 	  Removes the BPF interpreter to avoid Spectre v2 attacks.
 
-config HAVE_BPF_JIT
-	bool
-	depends on BPF_JIT
-
 config BPF_EVENTS
 	bool "Enable BPF programs attached to uprobes/kprobes/tracepoints"
 	depends on BPF_SYSCALL && (KPROBES || UPROBE_EVENTS) && PERF_EVENTS
