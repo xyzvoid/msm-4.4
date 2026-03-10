@@ -486,6 +486,19 @@ config TCP_CONG_CUBIC
 	among other techniques.
 	See http://www.csc.ncsu.edu/faculty/rhee/export/bitcp/cubic-paper.pdf
 
+
+config TCP_CONG_BBR2
+	ristate "BBR2 TCP"
+	default n
+	help
+	  BBR2 (Bottleneck Bandwidth and RTT v2) is a model-based
+	  congestion control algorithm. It improves on BBR v1 by
+	  responding to packet loss and ECN signals, bounding inflight
+	  bytes and sending rate to avoid queue build-up.
+
+	  Backported from the google/bbr v2alpha branch for msm-4.4.
+
+	  If in doubt, say N.
 config TCP_CONG_WESTWOOD
 	tristate "TCP Westwood+"
 	default m
