@@ -482,6 +482,23 @@ config TASK_IO_ACCOUNTING
 
 	  Say N if unsure.
 
+config SCHED_EAS
+	bool "Energy Aware Scheduling (EAS)"
+	depends on SMP
+	select SCHED_MC
+	default n
+	help
+	  Minimise energy on asymmetric (big.LITTLE / DynamIQ) SoCs.
+	  Requires schedutil governor.
+
+config SCHED_EAS_ENERGY_MARGIN_PCT
+	int "EAS energy margin (%)"
+	depends on SCHED_EAS
+	range 0 50
+	default 5
+	help
+	  feature fully implement EAS
+
 endmenu # "CPU/Task time and stats accounting"
 
 menu "RCU Subsystem"

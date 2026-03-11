@@ -2479,6 +2479,14 @@ void task_numa_work(struct callback_head *work)
 		} while (end != vma->vm_end);
 	}
 
+#ifdef CONFIG_SCHED_EAS
+	{
+		int eas_cpu = find_energy_efficient_cpu(
+				p, prev_cpu, tsk_cpus_allowed(p));
+		if (eas_cpu >= 0)
+			return eas_cpu;
+	}
+#endif
 out:
 	/*
 	 * It is possible to reach the end of the VMA list but the last few
