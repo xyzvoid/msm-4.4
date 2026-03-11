@@ -768,6 +768,14 @@ boost_write(struct cgroup_subsys_state *css, struct cftype *cft,
 	return 0;
 }
 
+#ifndef sync_cgroup_colocation
+/* Stub: full co-location support requires vendor sched patches.
+ * When not available, colocation hints are silently ignored.
+ */
+static inline void sync_cgroup_colocation(struct task_struct *p,
+					  bool colocate) {}
+#endif
+
 static void schedtune_attach(struct cgroup_taskset *tset)
 {
 	struct task_struct *task;
